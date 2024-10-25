@@ -18,7 +18,7 @@ export default function TodoList({
       {filteredTodoList.map((todo, index) => (
         <TodoCard
           key={todo.id}
-          index={index}
+          index={todos.findIndex((val) => val.input === todo.input)}
           todoItem={todo}
           handleDoneTodo={handleDoneTodo}
           handleDeleteTodo={handleDeleteTodo}
