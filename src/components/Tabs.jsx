@@ -32,6 +32,7 @@ export default function Tabs({ todos, currentTab, setCurrentTab }) {
           </h4>
         </button>
       ))}
+      <hr />
     </nav>
   );
 }

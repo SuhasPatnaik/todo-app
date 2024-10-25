@@ -6,21 +6,27 @@ import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
 
 function App() {
-  /* const todos = [
-    { input: "Hello! Add your first todo!", complete: true },
-    { input: "Get the groceries!", complete: false },
-    { input: "Learn how to web design", complete: false },
-    { input: "Say hi to gran gran", complete: true },
-    { input: "Go to gym", complete: false },
-  ]; */
-  const [todos, setTodos] = useState([
-    { input: "Hello! Add your first todo!", complete: true },
-  ]);
+  const [todos, setTodos] = useState([]);
   const [currentTab, setCurrentTab] = useState("Open");
 
   function handleAddTodo(newTodo) {
-    const newTodosList = [...todos, { input: newTodo, complete: false }];
-    setTodos(newTodosList);
+    const newTodoList = [
+      ...todos,
+      { id: Date.now(), input: newTodo, complete: false },
+    ];
+    setTodos(newTodoList);
+  }
+
+  function handleDoneTodo(todoItemIndex) {
+    let newTodoList = [...todos];
+    let completedTodo = { ...todos[todoItemIndex], complete: true };
+    newTodoList[todoItemIndex] = completedTodo;
+    setTodos(newTodoList);
+  }
+
+  function handleDeleteTodo(todoItemIndex) {
+    const newTodoList = todos.filter((todo, index) => index !== todoItemIndex);
+    setTodos(newTodoList);
   }
 
   return (
@@ -32,7 +38,12 @@ function App() {
         setCurrentTab={setCurrentTab}
       />
       <TodoInput handleAddTodo={handleAddTodo} />
-      <TodoList todos={todos} currentTab={currentTab} />
+      <TodoList
+        todos={todos}
+        currentTab={currentTab}
+        handleDoneTodo={handleDoneTodo}
+        handleDeleteTodo={handleDeleteTodo}
+      />
     </>
   );
 }

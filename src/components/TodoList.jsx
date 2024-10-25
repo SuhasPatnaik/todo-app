@@ -1,6 +1,11 @@
 import TodoCard from "./TodoCard";
 
-export default function TodoList({ todos, currentTab }) {
+export default function TodoList({
+  todos,
+  currentTab,
+  handleDeleteTodo,
+  handleDoneTodo,
+}) {
   const filteredTodoList =
     currentTab === "All"
       ? todos
@@ -11,7 +16,13 @@ export default function TodoList({ todos, currentTab }) {
   return (
     <>
       {filteredTodoList.map((todo, index) => (
-        <TodoCard key={index} todoItem={todo} />
+        <TodoCard
+          key={todo.id}
+          index={index}
+          todoItem={todo}
+          handleDoneTodo={handleDoneTodo}
+          handleDeleteTodo={handleDeleteTodo}
+        />
       ))}
     </>
   );
